@@ -118,7 +118,7 @@
 #         return(ghours * grate_per_hrs)
 #
 # print('Pay',computepay(hours, rate_per_hrs))
-
+#
 # # Find the largest number in [9, 41, 12, 3 74, 15]
 #
 # largest_number = 0
@@ -130,11 +130,10 @@
 #         continue
 #
 # print('largest number: ', largest_number)
-
-# # Write a program that repeatedly prompts a user for integer numbers until the user enters 'done'. # Once 'done' is
-# entered, print out the largest and smallest of the numbers. # If the user enters anything other than a valid number
-# catch it with a try/except and put out an appropriate message and ignore the number. # Enter 7, 2, bob, 10,
-# and 4 and match the output below.
+#
+# # Write a program that repeatedly prompts a user for integer numbers until the user enters 'done'. # Once 'done' is entered, print out the largest and smallest of the numbers.
+# # If the user enters anything other than a valid number catch it with a try/except and put out an appropriate message and ignore the number.
+# # Enter 7, 2, bob, 10, and 4 and match the output below.
 #
 # smallest_number = None
 # largest_number = None
@@ -180,16 +179,80 @@
 #
 # print('Maximum is', largest_number)
 # print('Minimum is', smallest_number)
-
-# Write code using find() and string slicing (see section 6.10) to extract the number at the end of the line below.
-# Convert the extracted value to a floating point number and print it out.
-text = "X-DSPAM-Confidence:    0.8475"
-
-colon_position = text.find(':')
-text_sliced = text[colon_position + 1:30]
-text_striped = text_sliced.strip()
-
-final_text = float(text_striped)
-
-print(final_text)
-
+#
+# # Write code using find() and string slicing (see section 6.10) to extract the number at the end of the line below.
+# # Convert the extracted value to a floating point number and print it out.
+# text = "X-DSPAM-Confidence:    0.8475"
+#
+# colon_position = text.find(':')
+# text_sliced = text[colon_position + 1:30]
+# text_striped = text_sliced.strip()
+#
+# final_text = float(text_striped)
+#
+# print(final_text)
+#
+#
+# # /Users/u75530/Documents/GitHub/CheatSheet
+#
+# # Write a program that prompts for a file name, then opens that file and reads through the file,
+# # and print the contents of the file in upper case.
+# # Use the file words.txt to produce the output below.
+# # You can download the sample data at http://www.py4e.com/code3/words.txt
+# file_name = input('Enter file name: ')
+#
+# if '.txt' not in file_name:
+#     file_name = file_name + '.txt'
+#
+# def read_file(file_handler):
+#     rFile = file_handler.read().upper().rstrip()
+#     print_file(rFile)
+#
+# def print_file(rFile):
+#     print(rFile)
+#
+# try:
+#     file_handler = open('/Users/u75530/Documents/GitHub/' + file_name)
+#     read_file(file_handler)
+# except Exception as e:
+#     print('Invalid file name!')
+#
+# # Write a program that prompts for a file name, then opens that file and reads through the file,
+# # looking for lines of the form:
+# # X-DSPAM-Confidence:    0.8475
+# # Count these lines and extract the floating point values from each of the lines and
+# # compute the average of those values and produce an output as shown below.
+# # Do not use the sum() function or a variable named sum in your solution.
+# # You can download the sample data at http://www.py4e.com/code3/mbox-short.txt
+# # When you are testing below enter mbox-short.txt as the file name.
+# file_name = input('Enter file name: ')
+#
+# count = 0
+# total_floating_point = 0
+#
+# def read_file(file_handler):
+#
+#     for data in file_handler:
+#         if data.startswith('X-DSPAM-Confidence:'):
+#             get_floating_point(data)
+#
+# def get_floating_point(data):
+#     global count
+#     global total_floating_point
+#
+#     colon_position = data.find(':')
+#     data_sliced = data[colon_position + 1:30]
+#     data_striped = data_sliced.strip()
+#
+#     floating_point = float(data_striped)
+#
+#     count = count + 1
+#     total_floating_point = total_floating_point + floating_point
+#
+# try:
+#     file_handler = open('/Users/u75530/Documents/' + file_name)
+#     read_file(file_handler)
+# except Exception as e:
+#     print('Invalid file name!', e)
+#
+# print('Average spam confidence:', total_floating_point/float(count))
