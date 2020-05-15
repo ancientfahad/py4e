@@ -86,7 +86,7 @@ astr = 'Fahad'
 
 try:
     istr = int(astr)
-except:
+except Exception as e:
     istr = -1
 print('first', istr)
 
@@ -94,7 +94,7 @@ astr = '123'
 
 try:
     istr = int(astr)
-except:
+except Exception as e:
     istr = -1
 print('second', istr)
 

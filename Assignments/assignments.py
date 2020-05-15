@@ -23,17 +23,22 @@ print('Pay:', gpay)
 # You should use input to read a string and float() to convert the string to a number.
 # Do not worry about error checking the user input - assume the user types numbers properly.
 
-# Verify input
+# Verify hours input
 try:
     hours = int(input('Enter hours: '))
-except:
-    print('Invalid hours')
-    seek(0)
+except Exception as e:
+    print('Invalid hours', e)
+    quit()
+
+    # seek(0)
+
+# Verify rate per hours input
 try:
     rate_per_hrs = float(input('Enter rate per hours: '))
-except:
-    print('Invalid rate')
+except Exception as e:
+    print('Invalid rate', e)
     quit()
+
 # Check for extra pay
 if hours > 40:
     normal_pay = 40 * rate_per_hrs
@@ -58,8 +63,8 @@ print(final_pay)
 
 try:
     score = float(input('Enter score between 0.0 and 1.0: '))
-except:
-    print('Invalid score!')
+except Exception as e:
+    print('Invalid score!', e)
 
 if score < 0.0 or score > 1.0:
     print('Invalid score. Score should be between 0.0 and 1.0')
@@ -76,32 +81,34 @@ else:
     elif score < 0.6:
         print('F')
 
-# Write a program to prompt the user for hours and rate per hour using input to compute gross pay.
-# Pay should be the normal rate for hours up to 40 and time-and-a-half for the hourly rate for all hours worked above 40 hours.
-# Put the logic to do the computation of pay in a function called computepay() and use the function to do the computation.
-# The function should return a value. Use 45 hours and a rate of 10.50 per hour to test the program (the pay should be 498.75).
-# You should use input to read a string and float() to convert the string to a number.
-# Do not worry about error checking the user input unless you want to - you can assume the user types numbers properly.
-# Do not name your variable sum or use the sum() function.
+# Write a program to prompt the user for hours and rate per hour using input to compute gross pay. Pay should be the
+# normal rate for hours up to 40 and time-and-a-half for the hourly rate for all hours worked above 40 hours. Put the
+# logic to do the computation of pay in a function called computepay() and use the function to do the computation.
+# The function should return a value. Use 45 hours and a rate of 10.50 per hour to test the program (the pay should
+# be 498.75). You should use input to read a string and float() to convert the string to a number. Do not worry about
+# error checking the user input unless you want to - you can assume the user types numbers properly. Do not name your
+# variable sum or use the sum() function.
 
 # Verify input
-
 hours = 0
 rate_per_hrs = 0
 
 while hours <= 0:
+    # noinspection PyBroadException
     try:
         hours = int(input('Type hours in numbers: '))
-    except:
+    except Exception as e:
         print('Invalid hours')
         quit()
+
     if hours <= 0:
         print('Invalid hours')
 
 while rate_per_hrs <= 0:
+    # noinspection PyBroadException
     try:
         rate_per_hrs = float(input('Type rate per hours in numbers: '))
-    except:
+    except Exception as e:
         print('Invalid rate')
         quit()
     if rate_per_hrs <= 0:
@@ -133,9 +140,10 @@ for number in [9, 41, 12, 3, 74, 15]:
 
 print('largest number: ', largest_number)
 
-# Write a program that repeatedly prompts a user for integer numbers until the user enters 'done'. # Once 'done' is entered, print out the largest and smallest of the numbers.
-# If the user enters anything other than a valid number catch it with a try/except and put out an appropriate message and ignore the number.
-# Enter 7, 2, bob, 10, and 4 and match the output below.
+# Write a program that repeatedly prompts a user for integer numbers until the user enters 'done'. # Once 'done' is
+# entered, print out the largest and smallest of the numbers. If the user enters anything other than a valid number
+# catch it with a try/except and put out an appropriate message and ignore the number. Enter 7, 2, bob, 10,
+# and 4 and match the output below.
 
 smallest_number = None
 largest_number = None
@@ -153,7 +161,7 @@ def get_user_input():
             user_input = int(user_input)
             get_largest_number(user_input)
             get_smallest_number(user_input)
-        except:
+        except Exception as e:
             print('Invalid input')
 
 
