@@ -270,3 +270,101 @@ except Exception as e:
     print('Invalid file name!', e)
 
 print('Average spam confidence:', total_floating_point / float(count))
+
+# Open the file romeo.txt and read it line by line. For each line, split the line into a list of words using the
+# split() method. The program should build a list of words. For each word on each line check to see if the word is
+# already in the list and if not append it to the list. When the program completes, sort and print the resulting
+# words in alphabetical order. You can download the sample data at http://www.py4e.com/code3/romeo.txt
+words_list = list()
+
+file_handler = open('/Users/u75530/Documents/romeo.txt')
+
+for line in file_handler:
+
+    line = line.rstrip()
+    line = line.split()
+
+    for words in line:
+
+        if words not in words_list:
+            words_list.append(words)
+
+words_list.sort()
+print(words_list)
+
+# Open the file mbox-short.txt and read it line by line. When you find a line that starts with 'From ' like the
+# following line: From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008 You will parse the From line using split()
+# and print out the second word in the line (i.e. the entire address of the person who sent the message). Then print
+# out a count at the end. Hint: make sure not to include the lines that start with 'From:'. You can download the
+# sample data at http://www.py4e.com/code3/mbox-short.txt
+
+file_name = input('Enter filename: ')
+
+if '.txt' not in file_name:
+    file_name = file_name + '.txt'
+
+try:
+    file_handler = open('/Users/u75530/Documents/' + file_name)
+except Exception as e:
+    print('File not found!', e)
+    quit()
+
+count = 0
+
+for line in file_handler:
+    line = line.rstrip()
+
+    if not line.startswith('From '):
+        continue
+    else:
+        count = count + 1
+        split_line = line.split()
+        email = split_line[1]
+
+        print(email)
+
+print('There were', count, 'lines in the file with From as the first word')
+
+# Write a program to read through the mbox-short.txt and figure out who has sent the greatest number of mail
+# messages. The program looks for 'From ' lines and takes the second word of those lines as the person who sent the
+# mail. The program creates a Python dictionary that maps the sender's mail address to a count of the number of times
+# they appear in the file. After the dictionary is produced, the program reads through the dictionary using a maximum
+# loop to find the most prolific committer.
+emails = dict()
+bigcount = None
+bigsender = None
+
+
+def find_emails(file_hander):
+    for line in file_handler:
+        if line.startswith('From '):
+            datas = line.split()
+            email = datas[1]
+            emails[email] = emails.get(email, 0) + 1
+
+    find_sender()
+
+
+def find_sender():
+    global bigcount
+    global bigsender
+
+    for sender, count in emails.items():
+        if bigcount is None or count > bigcount:
+            bigcount = count
+            bigsender = sender
+
+
+file_name = input('Enter filename: ')
+
+if '.txt' not in file_name:
+    file_name = file_name + '.txt'
+
+try:
+    file_handler = open('/Users/u75530/Documents/' + file_name)
+    find_emails(file_handler)
+except Exception as e:
+    print('File not found!', e)
+    quit()
+
+print(bigsender, bigcount)

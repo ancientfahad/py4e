@@ -348,3 +348,148 @@ try:
     read_data()
 except Exception as e:
     print('File not found', e)
+
+# List
+colors = ['black', 'white', 'blue']
+print(colors)
+
+colors[1] = 'dark black'
+print(colors)
+print(len(colors))
+
+print(range(len(colors)))
+
+for i in range(len(colors)):
+    color = colors[i]
+    print(color)
+
+# Concatenating Lists
+colors1 = ['black', 'blue', 'green']
+colors2 = ['white', 'yellow', 'red']
+
+colors = colors1 + colors2
+
+# print(len(colors1), len(colors2))
+# print(range(len(colors1)), range(len(colors2)))
+
+print(colors1)
+print(colors2)
+print(colors)
+
+sliced_colors = colors[1:3]
+
+print(sliced_colors)
+
+# List from Scratch
+new_list = list()
+new_list.append('Fahad Chowdhury')
+new_list.append('13/07/1994')
+new_list.append('0+')
+new_list.append('01617131994')
+
+new_list.append(input('Type your name: '))
+new_list.append(input('Type your dob: '))
+new_list.append(input('Type your blood group: '))
+new_list.append(input('Type your mobile number: '))
+
+print(new_list)
+
+# Sort Lists
+country_list = ['Brazil', 'Argentina', 'Germany', 'Portugal', 'England']
+country_list.sort()
+
+print(country_list)
+
+# Built in functions of list
+numbers = [10, 4, 3, 8, 12, 20, 13, 7]
+print(max(numbers), min(numbers), sum(numbers))
+
+# Strings and Lists
+message = 'With three words'
+split_message = message.split()
+
+message = 'With;three;words'
+split_message = message.split(';')
+
+print(split_message)
+
+for word in split_message:
+    print(word)
+
+file_handler = open('/Users/u75530/Documents/' + 'mbox-short.txt')
+
+for line in file_handler:
+    line = line.rstrip()
+
+    if not line.startswith('From '):
+        continue
+    else:
+        split_line = line.split()
+        email = split_line[1]
+        split_email = email.split('@')
+        host = split_email[1]
+
+        print(host)
+
+# Dictionary
+user_information = dict()
+user_information['name'] = 'Fahad Chowdhury'
+user_information['dob'] = '13/07/1994'
+user_information['bloodgroup'] = 'O+'
+user_information['contact'] = '01617131994'
+
+print(user_information)
+print(user_information['name'])
+
+name_dictonary = dict()
+names = ['Fahad', 'Anannya', 'Messi', 'Ronaldo', 'Fahad', 'Anannya', 'Messi', 'Fahad']
+
+for name in names:
+    if name not in name_dictonary:
+        name_dictonary[name] = 1
+    else:
+        name_dictonary[name] = name_dictonary[name] + 1
+
+print(name_dictonary)
+
+x = name_dictonary.get('Fahad', 0)
+
+counts = dict()
+names = ['Fahad', 'Anannya', 'Messi', 'Ronaldo', 'Fahad', 'Anannya', 'Messi', 'Fahad']
+
+for name in names:
+    counts[name] = counts.get(name, 0) + 1
+
+print(counts)
+
+file_handler = open('/Users/u75530/Documents/' + 'words.txt')
+
+counts = dict()
+for line in file_handler:
+    words = line.split()
+    for word in words:
+        counts[word] = counts.get(word, 0) + 1
+
+bigcount = None
+bigword = None
+
+for word, count in counts.items():
+    if bigcount is None or count > bigcount:
+        bigword = word
+        bigcount = count
+
+print(bigword, bigcount)
+
+for key in counts:
+    print(key, counts[key])
+
+print(list(counts))
+print(counts.keys())
+print(counts.values())
+print(counts.items())
+
+for counts_keys, counts_values in counts.items():
+    print(counts_keys, counts_values)
+
+stuff = dict()
+print(stuff.get('candy', -1))
