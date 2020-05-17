@@ -368,3 +368,40 @@ except Exception as e:
     quit()
 
 print(bigsender, bigcount)
+
+# Write a program to read through the mbox-short.txt and figure out the distribution by hour of the day for each of
+# the messages. You can pull the hour out from the 'From ' line by finding the time and then splitting the string a
+# second time using a colon. From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008 Once you have accumulated the
+# counts for each hour, print out the counts, sorted by hour as shown below.
+file_name = input('Enter file name: ')
+
+if len(file_name) < 0:
+    file_name = 'mbox-short.txt'
+
+file_handler = open(file_name)
+counts = dict()
+lists = list()
+
+# Loop through the file
+for line in file_handler:
+    # Check if line starts with From
+    if line.startswith('From '):
+        # Split the words in line
+        line_split = line.split()
+        # Get the time
+        time = line_split[5]
+        # Split the time
+        time_split = time.split(':')
+        # Get the hour
+        hour = time_split[0]
+
+        # Put it into a dictionary
+        counts[hour] = counts.get(hour, 0) + 1
+
+# Put the items from dictionary to list
+for h, c in counts.items():
+    lists.append((h, c))
+
+# Sort then print
+for h, c in sorted(lists):
+    print(h, c)

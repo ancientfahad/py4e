@@ -493,3 +493,58 @@ for counts_keys, counts_values in counts.items():
 
 stuff = dict()
 print(stuff.get('candy', -1))
+
+# Tuples
+sample_tuple = ('Black', 'White', 'Red')
+print(sample_tuple[2])
+
+# Tuples vs Dictionary
+d = dict()
+d['brazil'] = 2
+d['argentina'] = 1
+
+for (t, s) in d.items():
+    print(t, s)
+
+tups = d.items()
+print(tups)
+
+d = {'brazil': 3, 'argentina': 1, 'germany': 4, 'portugal': 2}
+# Sort by Keys
+print(d)
+print(d.items())
+
+for (t, s) in sorted(d.items()):
+    print(t, s)
+
+# Sort by Values
+tmp = list()
+for (t, s) in sorted(d.items()):
+    tmp.append((s, t))
+
+tmp = sorted(tmp, reverse=True)
+
+print(tmp)
+
+file_handler = open('/Users/u75530/Documents/romeo.txt')
+count = dict()
+for line in file_handler:
+    words = line.split()
+    for word in words:
+        count[word] = count.get(word, 0) + 1
+
+lst = list()
+for key, val in count.items():
+    newtup = (val, key)
+    lst.append(newtup)
+
+lst = sorted(lst, reverse=True)
+
+for val, key in lst:
+    print(key, val)
+
+d = {'brazil': 3, 'argentina': 1, 'germany': 4, 'portugal': 2}
+print(sorted([(v, k) for k, v in d.items()]))
+
+days = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun')
+print(days[2])
