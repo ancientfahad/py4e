@@ -79,8 +79,7 @@ print('Sum:', total)
 # Make sure to change the code to retrieve the above URL - the values are different for each URL.
 
 # Open the URL in a web browser with a developer console or FireBug and manually examine the headers that are
-returned.
-Use the telnet program as shown in lecture to retrieve the headers and content.
+# returned. Use the telnet program as shown in lecture to retrieve the headers and content.
 
 # Enter the header values in each of the fields below and press "Submit".
 import socket
