@@ -671,3 +671,69 @@ while True:
     print(data.decode())
 
 my_socket.close()
+
+import urllib.request, urllib.parse, urllib.error
+import ssl
+from bs4 import BeautifulSoup
+
+# Ignore SSL certificate errors
+ctx = ssl.create_default_context()
+ctx.check_hostname = False
+ctx.verify_mode = ssl.CERT_NONE
+
+url = input('Enter - ')
+html = urllib.request.urlopen(url, context=ctx).read()
+soup = BeautifulSoup(html, 'html.parser')
+
+# Retrieve all of the anchor tags
+tags = soup('a')
+for tag in tags:
+    print(tag.get('href', None))
+
+file_hander = urllib.request.urlopen('http://data.pr4e.org/romeo.txt')
+file_hander = urllib.request.urlopen('http://www.dr-chuck.com/page1.htm')
+counts = dict()
+
+for line in file_hander:
+    print(line.decode().strip())
+
+for line in file_hander:
+    words = line.decode().split()
+    for word in words:
+        counts[word] = counts.get(word, 0) + 1
+
+print(counts)
+
+url = input('Enter url: ')
+html = urllib.request.urlopen(url).read()
+soup = BeautifulSoup(html, 'html.parser')
+
+# Retrieve all anchor tags
+tags = soup('a')
+
+for tag in tags:
+    print(tag.get('href'), None)
+
+import re
+
+sample_string = '<p>Please click <a href="http://www.dr-chuck.com">here</a></p>'
+href_string = re.findall('href="(.+)"', sample_string)
+print(href_string)
+
+# Get numeric value of ASCII character
+print(ord('H'))
+
+# Get ASCII value of a numeric
+print(chr(72))
+
+# What word does the following sequence of numbers represent in ASCII:
+# 108, 105, 110, 101
+
+sample_list = [108, 105, 110, 101]
+output = ''
+
+for num in sample_list:
+
+    output = output + chr(num)
+
+print(output)
