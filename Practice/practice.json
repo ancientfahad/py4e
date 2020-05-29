@@ -1,7 +1,1 @@
-{
-  "call_details": [
-    {
-      "name": "test 1", "call_status": "N", "relation": "friend"
-    }
-  ]
-}
+{"call_details": [{"name": "test xxx", "call_status": "N", "relation": "relative"}]}
