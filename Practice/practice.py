@@ -1,15 +1,24 @@
-import json
-import sys
-import time
-import re
+import json, sys, time, re, shutil, os
 
 # file location windows
-# file_location = r'C:\Users\fchow\OneDrive\Documents\GitHub\Practice\practice.json'
+# file_location = r'C:\Users\fchow\OneDrive\Documents\GitHub\Practice\'
 
 # file location mac
-folder_location = '/Users/u75530/Documents/GitHub/Practice/'
+folder_location = os.getcwd()
 file_location = None
 file_name = None
+json_file = None
+json_data = None
+
+
+def format_data(_name, _call_status, _relation):
+    json_format = {
+    "name" : _name,
+    "call_status" : _call_status,
+    "relation" : _relation
+    }
+
+    return json_format
 
 
 def loading(text, delay):
@@ -20,83 +29,166 @@ def loading(text, delay):
     print
 
 
-def open_file():
+def main():
+    global file_location, folder_location, file_name, json_file, json_data
+
     try:
-        global file_location, folder_location, file_name
+        while True:
+            choice = int(input('1. Read data\n2. Add data\n3. Update data\n4. Upload data\n5. Exit\nEnter your choice : '))
 
-        file_name = input('\nEnter file name: ')
-        file_location = folder_location + file_name
+            if choice not in range(1, 6):
+                print('\nInvalid answer!\n')
+            else:
+                if choice == 1:
+                    json_data = open_fileR()
+                    print_data(json_data)
+                elif choice == 2:
+                    add_data()
+                elif choice == 3:
+                    update_data()
+                elif choice == 4:
+                    pass
+                else:
+                    print()
+                    quit()
+    except Exception as e:
+        print('Error _main!', e)
 
-        loading(('\nSearching for ' + file_name + ' .....'), 0.05)
-        file_handler = open(file_location)
-        loading('\nSearching complete .....', 0.05)
+
+def open_fileR():
+    global file_location, folder_location, file_name, json_file, json_data
+
+    try:
+        file_name = 'practice.json'
+        file_location = folder_location + ('/' + file_name)
+
+        loading(('\nSearching for ' + file_name + ' .....'), 0.04)
+        json_file = open(file_location, "r")
+        loading('\nSearching complete .....', 0.04)
 
         print('\n\nFile found in', file_location)
 
-        read_file(file_handler)
+        if os.path.getsize('practice.json') == 0:
+            print('\nFile is empty!\n')
+            return None
+        else:
+            json_data = json.loads(json_file.read())
+            return(json_data)
 
     except Exception as e:
-        print('\n\nFile not found!', e)
+        print('\n\nFile not found!\n', e)
         print()
 
 
-def read_file(file_handler):
+def open_fileW():
+    global file_location, folder_location, file_name, json_file, json_data
+
     try:
-        infos = json.loads(file_handler.read())
+        file_name = 'practice.json'
+        file_location = folder_location + ('/' + file_name)
+        json_file = open(file_location, "r")
+        json_data = json.loads(json_file.read())
+        json_file.close()
 
-        loading('\nRetrieving data .....\n', 0.05)
+        return json_data
 
-        for info in infos['call_details']:
-            print('name         :', info['name'])
-            print('call_status  :', info['call_status'])
-            print('relation     :', info['relation'])
+    except Exception as e:
+        print('Error _open_fileW!', e)
+        print()
+
+
+def update_file(json_file, json_datas):
+    print()
+    print(json.dumps(json_data,indent = 4))
+    print()
+
+    loading(('\nUpdating data .....'), 0.04)
+    json_file.seek(0)
+    json_file.write(json.dumps(json_data))
+    loading('\nUpdating complete .....\n\n', 0.04)
+
+
+def print_data(json_data):
+    print()
+    print(json.dumps(json_data,indent = 4))
+
+    if len(json_data['call_details']) < 1:
+        print('\nNo data found!\n')
+    else:
+        loading('\nRetrieving data .....\n', 0.04)
+
+        for data in json_data['call_details']:
+            print('name         :', data['name'])
+            print('call_status  :', data['call_status'])
+            print('relation     :', data['relation'])
             print()
 
-        file_handler.close()
 
-        write_file(infos)
+def add_data():
+    global file_location, folder_location, file_name, json_file, json_data
+
+    json_data = open_fileW()
+    json_file = open(file_location, "w")
+
+    _name = input('\nEnter name: ')
+    _call_status = input('Enter call status: ')
+    _relation = input('Enter relation: ')
+
+    json_data['call_details'].append(format_data(_name, _call_status, _relation))
+
+    print(json.dumps(json_data,indent = 4))
+    loading(('\nAdding data .....'), 0.04)
+    json_file.seek(0)
+    json_file.write(json.dumps(json_data))
+    loading('\nAdding complete .....\n\n', 0.04)
 
 
-    except Exception as e:
-        print('\n\nFile could not be read!', e)
+def update_data():
+    global file_location, folder_location, file_name, json_file, json_data
 
+    json_data = open_fileW()
+    json_file = open(file_location, "w")
 
-def write_file(infos):
-    try:
-        global file_location, folder_location, file_name
+    print()
+    print(json.dumps(json_data,indent = 4))
+    print()
 
-        while True:
-            choice = input('Do you want to update data? [Y/N] : ')
+    user_choice = input('Do you want to update all users data or single user data? [A/S]: ')
 
-            if choice == 'Y' or choice == 'N':
-                if choice == 'Y':
-                    infos['call_details'][0]['name'] = 'test xxx'
-                    infos['call_details'][0]['call_status'] = 'N'
-                    infos['call_details'][0]['relation'] = 'relative'
+    if user_choice == 'A':
+        _call_status = input('\nEnter call status for all user: ')
 
-                    file_handler = open(file_location, "w+")
+        for data in json_data['call_details']:
+            data['call_status'] = _call_status
 
-                    loading(('\nUpdating ' + file_name + ' .....'), 0.05)
-                    file_handler.write(json.dumps(infos))
-                    loading('\nUpdating complete .....\n\n', 0.05)
+        update_file(json_file, json_data)
+    else:
+        selected_user = input('\nType user name: ')
 
-                    for info in infos['call_details']:
-                        print('name         :', info['name'])
-                        print('call_status  :', info['call_status'])
-                        print('relation     :', info['relation'])
-                        print()
+        for data in json_data['call_details']:
+            if data['name'] == selected_user:
 
-                    file_handler.close()
-                else:
-                    print()
-                    break
+                print()
+                print('User selected: ', data['name'])
+                print()
+
+                # _name = input('Enter name: ')
+                _call_status = input('Enter call status: ')
+                # _relation = input('Enter relation: ')
+
+                # data['name'] = _name
+                data['call_status'] = _call_status
+                # data['relation'] = _relation
+
+                update_file(json_file, json_data)
 
                 break
-            else:
-                print('\nInvalid answer! Enter Y or N\n')
 
-    except Exception as e:
-        print('\n\nFile could not be updated!', e)
-        print()
 
-open_file()
+def upload_data():
+    pass
+
+main()
+
+
+# {"call_details": [{"name": "Anannya Ahmed", "call_status": "Y", "relation": "Family"}, {"name": "Shatil", "call_status": "N", "relation": "Friend"}]}
