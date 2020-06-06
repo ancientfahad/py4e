@@ -153,10 +153,10 @@ def update_data():
     print(json.dumps(json_data,indent = 4))
     print()
 
-    user_choice = input('Do you want to update all users data or single user data? [A/S]: ')
+    user_choice = input('Do you want to update all users data or single user data? [A/S]: ').upper()
 
     if user_choice == 'A':
-        _call_status = input('\nEnter call status for all user: ')
+        _call_status = input('\nEnter call status for all user [Y/N]: ').upper()
 
         for data in json_data['call_details']:
             data['call_status'] = _call_status
@@ -188,7 +188,7 @@ def update_data():
 def upload_data():
     pass
 
+
 main()
 
-
-# {"call_details": [{"name": "Anannya Ahmed", "call_status": "Y", "relation": "Family"}, {"name": "Shatil", "call_status": "N", "relation": "Friend"}]}
+# https://stackoverflow.com/questions/36606930/delete-an-element-in-a-json-object

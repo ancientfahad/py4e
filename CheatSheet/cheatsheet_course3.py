@@ -171,7 +171,7 @@ href_string = re.findall('href="(.+)"', sample_string)
 print(href_string)
 
 # Get numeric value of ASCII character
-print(ord('H'))
+print(ord('G'))
 
 # Get ASCII value of a numeric
 print(chr(72))
@@ -179,7 +179,7 @@ print(chr(72))
 # What word does the following sequence of numbers represent in ASCII:
 # 108, 105, 110, 101
 
-sample_list = [108, 105, 110, 101]
+sample_list = [108, 105, 115, 116]
 output = ''
 
 for num in sample_list:

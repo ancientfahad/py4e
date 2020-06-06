@@ -1,1 +1,1 @@
-{"call_details": [{"name": "Aleya", "call_status": "Y", "relation": "Friend"}, {"name": "Anannya Ahmed", "call_status": "Y", "relation": "Wife"}, {"name": "Shatil", "call_status": "Y", "relation": "Friend"}]}
+{"call_details": [{"name": "Aleya", "call_status": "Y", "relation": "Friend"}, {"name": "Anannya Ahmed", "call_status": "N", "relation": "Wife"}, {"name": "Shatil", "call_status": "Y", "relation": "Friend"}]}
