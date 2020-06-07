@@ -166,7 +166,7 @@ def insert_Album(album_title, artist_id):
         param['album_title'] = album_title
         param['artist_id'] = artist_id
 
-        param = {'album_title': album_title, 'artist_id': artist_id}
+        print(param)
         sql_string = 'INSERT INTO Album (title, artist_id) VALUES(:album_title, :artist_id)'
 
         cur.execute(sql_string, param)
