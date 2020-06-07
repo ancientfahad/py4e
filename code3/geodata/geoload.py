@@ -6,7 +6,7 @@ import time
 import ssl
 import sys
 
-api_key = 'AIzaSyBY3BCTNWVeoQwrKGmfoxrGhVCMmIVBKo8'
+api_key = None
 # If you have a Google Places API key, enter it here
 # api_key = 'AIzaSy___IDByT70'
 
